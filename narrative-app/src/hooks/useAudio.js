@@ -1,6 +1,40 @@
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useEffect } from 'react'
 import { useGame } from '../context/GameContext'
 
+// ─── AMBIENT MP3 ────────────────────────────────────────────
+// Put your file in /public/audio/ and set the filename here.
+// If you have no file, set this to null and the app still works.
+const AMBIENT_FILE = '/audio/inthepool.mp3'   // ← change this to your filename
+const AMBIENT_VOLUME = 0.18                  // 0.0 – 1.0, keep it subtle
+
+// ─── Shared ambient instance (lives outside React) ──────────
+let ambientAudio = null
+
+function getAmbient() {
+  if (!ambientAudio && AMBIENT_FILE) {
+    ambientAudio = new Audio(AMBIENT_FILE)
+    ambientAudio.loop = true
+    ambientAudio.volume = 0
+  }
+  return ambientAudio
+}
+
+function fadeAmbientTo(targetVolume, durationMs = 1200) {
+  const audio = getAmbient()
+  if (!audio) return
+  const steps = 30
+  const interval = durationMs / steps
+  const start = audio.volume
+  const delta = (targetVolume - start) / steps
+  let step = 0
+  const timer = setInterval(() => {
+    step++
+    audio.volume = Math.max(0, Math.min(1, start + delta * step))
+    if (step >= steps) clearInterval(timer)
+  }, interval)
+}
+
+// ─── Web Audio synth tones (for click/impact) ───────────────
 let sharedAudioCtx = null
 
 function getAudioCtx() {
@@ -29,16 +63,34 @@ function playTone(freq = 440, type = 'sine', duration = 0.15, gainValue = 0.08) 
   }
 }
 
+// ─── Hook ────────────────────────────────────────────────────
 export function useAudio() {
   const { audioEnabled, interacted } = useGame()
 
-  const resumeContext = useCallback(() => {
-    try {
-      getAudioCtx().resume()
-    } catch {
-      // ignore
+  // Start / stop ambient when interacted or audioEnabled changes
+  useEffect(() => {
+    const audio = getAmbient()
+    if (!audio) return
+
+    if (interacted && audioEnabled) {
+      audio.play().catch(() => {}) // browser may still block; ignore
+      fadeAmbientTo(AMBIENT_VOLUME)
+    } else {
+      fadeAmbientTo(0, 600)
+      setTimeout(() => {
+        if (!audioEnabled) audio.pause()
+      }, 650)
     }
-  }, [])
+  }, [interacted, audioEnabled])
+
+  const resumeContext = useCallback(() => {
+    try { getAudioCtx().resume() } catch {}
+    const audio = getAmbient()
+    if (audio && audioEnabled) {
+      audio.play().catch(() => {})
+      fadeAmbientTo(AMBIENT_VOLUME)
+    }
+  }, [audioEnabled])
 
   const playClick = useCallback(() => {
     if (!audioEnabled || !interacted) return
