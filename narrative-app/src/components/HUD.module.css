@@ -1,0 +1,40 @@
+.audioToggle {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 200;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.4);
+  padding: 6px 14px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.audioToggle:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.resetButton {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  z-index: 200;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.18);
+  padding: 6px 12px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.resetButton:hover {
+  color: rgba(255, 255, 255, 0.45);
+}

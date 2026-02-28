@@ -1,0 +1,169 @@
+.container {
+  min-height: 100dvh;
+  padding: 88px 24px 88px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.endingLabel {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: #8B7355;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.endingTitle {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 54px);
+  font-weight: 300;
+  color: #F2F2F2;
+  line-height: 1.1;
+  margin-bottom: 0;
+  letter-spacing: -0.01em;
+}
+
+.divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, #8B7355, transparent);
+  margin: 32px 0;
+}
+
+.summary {
+  color: rgba(255, 255, 255, 0.58);
+  line-height: 1.9;
+  font-size: clamp(14px, 2vw, 16px);
+  margin-bottom: 32px;
+  max-width: 600px;
+}
+
+.warning {
+  border-left: 2px solid #A87B7B;
+  padding: 10px 0 10px 20px;
+  margin-bottom: 32px;
+  color: #A87B7B;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.65;
+  max-width: 560px;
+}
+
+.cta {
+  color: #D4AF7A;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  margin-bottom: 72px;
+}
+
+.section {
+  margin-bottom: 64px;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: rgba(255, 255, 255, 0.22);
+  margin-bottom: 28px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.choiceList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.choiceItem {
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.choiceItem:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.choiceAct {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.22);
+  margin-bottom: 6px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.choiceText {
+  font-size: clamp(14px, 2vw, 15px);
+  color: rgba(255, 255, 255, 0.58);
+  line-height: 1.55;
+  margin-bottom: 6px;
+}
+
+.choiceImpact {
+  font-size: 11px;
+  color: #8B7355;
+  letter-spacing: 0.05em;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.replayBtn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #F2F2F2;
+  padding: 14px 36px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.replayBtn:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.shareBtn {
+  background: rgba(139, 115, 85, 0.12);
+  border: 1px solid #8B7355;
+  color: #D4AF7A;
+  padding: 14px 36px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.25s, box-shadow 0.25s;
+}
+
+.shareBtn:hover {
+  background: rgba(139, 115, 85, 0.22);
+  box-shadow: 0 0 20px rgba(139, 115, 85, 0.15);
+}
+
+.hiddenCard {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  pointer-events: none;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 80px 20px 72px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .replayBtn,
+  .shareBtn {
+    width: 100%;
+    text-align: center;
+  }
+}
