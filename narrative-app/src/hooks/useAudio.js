@@ -4,7 +4,7 @@ import { useGame } from '../context/GameContext'
 // ─── AMBIENT MP3 ────────────────────────────────────────────
 // Put your file in /public/audio/ and set the filename here.
 // If you have no file, set this to null and the app still works.
-const AMBIENT_FILE = '/audio/inthepool.mp3'   // ← change this to your filename
+const AMBIENT_FILE = `${import.meta.env.BASE_URL}audio/inthepool.mp3`   // ← change this to your filename
 const AMBIENT_VOLUME = 0.18                  // 0.0 – 1.0, keep it subtle
 
 // ─── Shared ambient instance (lives outside React) ──────────
